@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:storage_test/services/isar.dart';
+import 'package:storage_test/services/scheduler.dart';
 import 'package:storage_test/stores/users_store.dart';
 // import 'package:storage_test/stores/users_store_old.dart';
 import 'package:signals/signals_flutter.dart';
@@ -37,12 +38,24 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with SchedulerMixin {
   final userStore = UsersStore();
 
   void fetch() {
     userStore.sync();
     // userStore.sync.fetch();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    useScheduler(
+      () {
+        print('scheduler');
+      },
+      const Duration(minutes: 5),
+      SchedulerOptions(trigger: SchedulerTrigger.appear),
+    );
   }
 
   @override

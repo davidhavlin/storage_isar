@@ -3,6 +3,7 @@ import 'package:storage_test/models/address.dart';
 import 'package:storage_test/models/company.dart';
 import 'package:storage_test/models/geo.dart';
 
+// generate this with `flutter pub run build_runner build`
 part 'user.g.dart';
 
 @collection
