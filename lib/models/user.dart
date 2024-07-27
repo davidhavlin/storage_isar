@@ -8,7 +8,6 @@ part 'user.g.dart';
 @collection
 class User {
   // Id id = Isar.autoIncrement;
-  // Id get id => apiId;
 
   @Index(unique: true, replace: true)
   Id id;

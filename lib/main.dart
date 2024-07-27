@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:storage_test/services/isar.dart';
 import 'package:storage_test/stores/users_store.dart';
+// import 'package:storage_test/stores/users_store_old.dart';
 import 'package:signals/signals_flutter.dart';
 
 void main() async {
@@ -39,8 +40,9 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final userStore = UsersStore();
 
-  void fetchData() {
-    userStore.sync.fetch();
+  void fetch() {
+    userStore.sync();
+    // userStore.sync.fetch();
   }
 
   @override
@@ -51,7 +53,8 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Watch((context) {
-        final isLoading = userStore.sync.isLoading.value;
+        final isLoading = userStore.isLoading.value;
+        // final isLoading = userStore.sync.isLoading.value;
         final users = userStore.users.value;
 
         if (isLoading) {
@@ -70,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
         );
       }),
       floatingActionButton: FloatingActionButton(
-        onPressed: fetchData,
+        onPressed: fetch,
         tooltip: 'Fetch data',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
