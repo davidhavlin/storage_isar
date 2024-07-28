@@ -3,14 +3,9 @@ import 'package:storage_test/services/api.dart';
 import 'package:storage_test/services/persist_signal.dart';
 import 'package:storage_test/services/syncable.dart';
 
-class UsersStore extends Syncable {
-  static final UsersStore _instance = UsersStore._internal();
-  factory UsersStore() {
-    return _instance;
-  }
-
+class UsersStore extends SyncableStore {
   UsersStore._internal()
-      : super('users', syncInterval: const Duration(minutes: 1));
+      : super(id: 'users', syncInterval: const Duration(minutes: 1));
 
   final users = PersistentSignal<User>('users');
 
@@ -20,3 +15,5 @@ class UsersStore extends Syncable {
     users.value = response.map((userData) => User.fromJson(userData)).toList();
   }
 }
+
+final userStore = UsersStore._internal();

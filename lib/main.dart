@@ -39,7 +39,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> with SchedulerMixin {
-  final userStore = UsersStore();
+  // final userStore = UsersStore();
 
   void fetch() {
     userStore.sync();

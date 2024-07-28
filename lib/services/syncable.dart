@@ -3,12 +3,15 @@
 import 'package:signals/signals_flutter.dart';
 import 'package:storage_test/services/storage.dart';
 
-abstract class Syncable {
+abstract class SyncableStore {
   final String id;
   final Signal<bool> isLoading = Signal<bool>(false);
   final Duration syncInterval;
 
-  Syncable(this.id, {this.syncInterval = const Duration(minutes: 30)});
+  SyncableStore({
+    required this.id,
+    this.syncInterval = const Duration(minutes: 30),
+  });
 
   Future<void> fetchData();
 
